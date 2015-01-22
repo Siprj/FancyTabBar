@@ -195,7 +195,12 @@ void FancyTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        activeIndex = getTabIndexByPoint(event->x(), event->y());
+        qint32 ret = getTabIndexByPoint(event->x(), event->y());
+
+        // If non of the tabs is clicked dont change the curent activeIndex.
+        if(ret != -1)
+            activeIndex = ret;
+
         update();
 
         emit activeIndexChanged(activeIndex);
