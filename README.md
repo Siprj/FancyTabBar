@@ -6,6 +6,8 @@ sources https://qt.gitorious.org/qt-creator or already altered version
 https://github.com/pcogermany/FancyTabBar but I was afraid of misunderstanding
 licence so I created my own replica of FancyTabBar.
 
+![Example screenshot](https://raw.githubusercontent.com/Siprj/FancyTabBar/master/img/example-app-screenshot.png)
+
 # Compilation
 
 Compile it with qmake or you can open it with Qt Crator.
