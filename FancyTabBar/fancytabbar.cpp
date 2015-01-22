@@ -83,8 +83,18 @@ FancyTabBar::Error FancyTabBar::setActiveIndex(qint32 index)
 }
 
 /*!
- * \brief FancyTabBar::paintEvent
- * \param event
+ * \brief FancyTabBar::paintEvent this function is called if the FancyTabBar
+ *   should be repainted.
+ *   <H1>Drawing process</H1>
+ *     -# Firt of all the frame is drawen with gradient as backgroud.
+ *     -# Hovered tabs background is drawen.
+ *     -# All tabs are drawen except current active tab.
+ *     -# If some tab is active then
+ *        -# draw the active backgroud.
+ *        -# draw active tab
+ *        -# draw the borders around the active tab (borders are drowen in to
+ *           neighbored tabs!!!).
+ * \param event see qt documentation for more details about this parameter.
  */
 void FancyTabBar::paintEvent(QPaintEvent *event)
 {
@@ -176,8 +186,10 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
 }
 
 /*!
- * \brief FancyTabBar::mouseReleaseEvent
- * \param event
+ * \brief FancyTabBar::mouseReleaseEvent if mouse release event is trigered.
+ *   Active tabe must emit signal to let the rest of app know that the index
+ *   was changed.
+ * \param event see qt documentation for more details about this parameter.
  */
 void FancyTabBar::mouseReleaseEvent(QMouseEvent *event)
 {
@@ -192,8 +204,9 @@ void FancyTabBar::mouseReleaseEvent(QMouseEvent *event)
 }
 
 /*!
- * \brief FancyTabBar::mouseMoveEvent
- * \param event
+ * \brief FancyTabBar::mouseMoveEvent whan the cursor is inside FancyTabBar area
+ *   we need to update howered tab index if the cursor move.
+ * \param event see qt documentation for more details about this parameter.
  */
 void FancyTabBar::mouseMoveEvent(QMouseEvent *event)
 {
@@ -203,8 +216,9 @@ void FancyTabBar::mouseMoveEvent(QMouseEvent *event)
 }
 
 /*!
- * \brief FancyTabBar::enterEvent
- * \param event
+ * \brief FancyTabBar::enterEvent make hower tab which is under cursor when the
+ *   cursor enter FancyTabBar area.
+ * \param event see qt documentation for more details about this parameter.
  */
 void FancyTabBar::enterEvent(QEvent *event)
 {
@@ -214,20 +228,22 @@ void FancyTabBar::enterEvent(QEvent *event)
 }
 
 /*!
- * \brief FancyTabBar::leaveEvent
- * \param event
+ * \brief FancyTabBar::leaveEvent make the hover over some tab disapare.
+ * \param event see qt documentation for more details about this parameter.
  */
 void FancyTabBar::leaveEvent(QEvent *event)
 {
     Q_UNUSED(event);
+    // disable hower
     hower = -1;
+    // repaint
     update();
 }
 
 /*!
- * \brief FancyTabBar::getTabRect
- * \param index
- * \return
+ * \brief FancyTabBar::getTabRect returns position and size of given tab
+ *   index.
+ * \param index index of the tab.
  */
 QRect FancyTabBar::getTabRect(qint32 index)
 {
@@ -236,9 +252,9 @@ QRect FancyTabBar::getTabRect(qint32 index)
 }
 
 /*!
- * \brief FancyTabBar::getIconRect
- * \param index
- * \return
+ * \brief FancyTabBar::getIconRect returns position and size of icon of given
+ *   tab index.
+ * \param index index of the tab
  */
 QRect FancyTabBar::getIconRect(qint32 index)
 {
@@ -247,9 +263,9 @@ QRect FancyTabBar::getIconRect(qint32 index)
 }
 
 /*!
- * \brief FancyTabBar::getTextRect
- * \param index
- * \return
+ * \brief FancyTabBar::getTextRect returns position and size of text area of
+ *   given tab index.
+ * \param index index of the tab
  */
 QRect FancyTabBar::getTextRect(qint32 index)
 {
@@ -258,9 +274,9 @@ QRect FancyTabBar::getTextRect(qint32 index)
 }
 
 /*!
- * \brief FancyTabBar::getTabYPos
- * \param index
- * \return
+ * \brief FancyTabBar::getTabYPos return Y position of give tab index. This
+ *   function is mostly used by all another internal position functions.
+ * \param index index of the tab
  */
 qint32 FancyTabBar::getTabYPos(qint32 index)
 {
@@ -268,10 +284,12 @@ qint32 FancyTabBar::getTabYPos(qint32 index)
 }
 
 /*!
- * \brief FancyTabBar::getTabIndexByPoint
- * \param x
- * \param y
- * \return
+ * \brief FancyTabBar::getTabIndexByPoint take poin in the 2D space and tels
+ *   if it is inside of some tab. Returned value is tab index if some tab is
+ *   found.
+ * \param x x position of point.
+ * \param y y position of point.
+ * \return tab index if success. -1 otherwise.
  */
 qint32 FancyTabBar::getTabIndexByPoint(qint32 x, qint32 y)
 {
@@ -284,10 +302,13 @@ qint32 FancyTabBar::getTabIndexByPoint(qint32 x, qint32 y)
 }
 
 /*!
- * \brief FancyTabBar::drawTabContent
- * \param painter
- * \param index
- * \param invertTextColor
+ * \brief FancyTabBar::drawTabContent function which draw tab context. That
+ *   mean this function draw tab icon and tab text on position returned by
+ *   getTextRect() and getIconRect()
+ * \param painter is painter passed from paintEvent
+ * \param index is index of tab inside FancyTabBar
+ * \param invertTextColor tels to function is text color should by inverted.
+ *   This feature is usefull whan some tab is selected.
  */
 void FancyTabBar::drawTabContent(QPainter *painter, qint32 index,
                                  bool invertTextColor)
@@ -313,7 +334,8 @@ void FancyTabBar::drawTabContent(QPainter *painter, qint32 index,
 }
 
 /*!
- * \brief FancyTabBar::init
+ * \brief FancyTabBar::init init all variable inside FancyTabBar class.
+ *   Must be called in all constructors....
  */
 void FancyTabBar::init()
 {
@@ -335,7 +357,4 @@ void FancyTabBar::init()
 
     setMouseTracking(true);
     hower = -1;
-
-
-    // TODO: Reasonable min/max width/height setup
 }

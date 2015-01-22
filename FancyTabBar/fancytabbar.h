@@ -7,6 +7,11 @@
 
 #include "fancytab.h"
 
+/*!
+ * \brief Goal of this class is TabBar similar to QtCreator left TabBarr.
+ *   TabBar usage is described in example folder.
+ */
+
 class FancyTabBar : public QWidget
 {
     Q_OBJECT
