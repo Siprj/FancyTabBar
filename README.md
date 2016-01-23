@@ -2,9 +2,9 @@
 
 FancyTabBar is small project with objective to create tab-bar similar to 
 main tab-bar in Qt Creator. It is possible to get Qt Creators tab-bar from
-sources https://qt.gitorious.org/qt-creator or already altered version
-https://github.com/pcogermany/FancyTabBar but I was afraid of misunderstanding
-licence so I created my own replica of FancyTabBar.
+sources https://qt.gitorious.org/qt-creator or already altered version from
+https://github.com/pcogermany/FancyTabBar, but I was afraid of misunderstanding
+the licence, so I created my own replica of FancyTabBar.
 
 ![Example screenshot](https://raw.githubusercontent.com/Siprj/FancyTabBar/master/img/example-app-screenshot.png)
 
@@ -17,7 +17,7 @@ qmake FancyTabBar.pro
 make
 ```
 
-# Tools by this project
+# Prerequisites
 
 - Qt library
 - Qt Creator
